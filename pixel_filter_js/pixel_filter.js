@@ -6,8 +6,7 @@ function processed_button(){
     document.getElementById("pic").src = document.getElementById("output").value;
 }
 function pixel_button(){
-    var pixel_value = document.getElementById("pixel_scale").value;
-    pixelateImage("content", pixel_value, "pic");
+    pixel_function_all_s();
 }
 
 // drag and drop
@@ -42,6 +41,7 @@ function handleFileSelect(evt) {
         cutImageBase64(file, null, 900, 0.7, new_id);
         // generateBlurPreview(file, -1, -1, 0.2, 2, "preview");
         // pixelateImage(file, 4, "pic");
+        // kMeansColorSegmentation(file, 32, 'pic');
     }
     else{
         var reader = new FileReader();
@@ -137,9 +137,10 @@ function generateBlurPreview(input, width, height, quality, scale, output_id) {
 function pixelateImage(input, pixelSize, outputId) {
     const img = new Image();
     if(typeof input == "string"){
-        if(input == "content"){
-            img.src = document.getElementById("content").value;
+        if(input == "content"||input == "output"){
+            img.src = document.getElementById(input).value;
         }
+        else if(input == "pic")img.src = document.getElementById(input).src;
         else img.src = base64String;
     }
     else{
@@ -198,3 +199,61 @@ function pixelateImage(input, pixelSize, outputId) {
         document.getElementById("output").value = pixelatedImg.src;
     };
 };
+
+
+// kmeans
+function kMeansColorSegmentation(input, k, output_id) {
+    // load image
+    var img = new Image();
+    if(typeof input == "string"){
+        if(input == "content"||input == "output"){
+            img.src = document.getElementById(input).value;
+        }
+        else if(input == "pic")img.src = document.getElementById(input).src;
+        else img.src = base64String;
+    }
+    else{
+        const reader = new FileReader();
+        reader.readAsDataURL(input);
+        reader.onload = function(event) {
+        img.src = event.target.result;
+        };
+    }
+
+    // recall, after image load it will active
+    img.onload = function() {
+    // create canvas
+    var canvas = document.createElement("canvas");
+    var ctx = canvas.getContext("2d");
+
+    // set canvas size to image size
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // draw image on canvas
+    ctx.drawImage(img, 0, 0);
+
+    // load pixel data from canvas
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var pixels = imageData.data;
+
+    // turn data into 2d array
+    var pixelArray = new Array(canvas.height);
+    for (var i = 0; i < pixelArray.length; i++) {
+      pixelArray[i] = new Array(canvas.width);
+      for (var j = 0; j < pixelArray[i].length; j++) {
+        var index = (i * canvas.width + j) * 4;
+        pixelArray[i][j] = [pixels[index], pixels[index + 1], pixels[index + 2]];
+      }
+    }
+
+    // make 2d array to 1d array
+    var data = new Array(canvas.width * canvas.height);
+    var c = 0;
+    for (var i = 0; i < pixelArray.length; i++) {
+      for (var j = 0; j < pixelArray[i].length; j++) {
+        data[c] = pixelArray[i][j];
+        c++;
+      }
+    }
+
