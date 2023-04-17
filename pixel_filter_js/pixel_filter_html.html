@@ -1,15 +1,3 @@
----
-title: Pixel Filter JS
-date: 2023-04-16 10:00:00
-tags: [tool]
-categories: [tool]
-description: An online tool help you pixelize files
-top_img: https://img.itch.zone/aW1hZ2UvMTY4Njk0My85OTM1OTQ3LnBuZw==/original/M7FmPr.png
-comments: true
-cover: https://img.itch.zone/aW1hZ2UvMTY4Njk0My85OTM1OTQ3LnBuZw==/original/M7FmPr.png
-urlname: pixel_filter_js
----
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,8 +17,10 @@ urlname: pixel_filter_js
 <body>
     <p>This tool is made by <a href="https://github.com/JingShing">JingShing</a>.</p>
     <p>You can drag your file in the content(or simply click content to select file).Now we support txt, jpg and png file.</p>
+    <p>If color num using 0 or -1 will not apply color num.</p>
     <p>這個工具由 <a href="https://github.com/JingShing">JingShing</a> 製作</p>
     <p>可以拖曳檔案到 content 欄(或點擊 content 選擇檔案)，目前支持 txt, jpg 和 png 檔。</p>
+    <p>如果 color number 設為 -1 或 0 則不會套用顏色數量。</p>
     <form>
         <input type="file" id="fileInput_content" style="display:none">
     </form>
@@ -40,7 +30,7 @@ urlname: pixel_filter_js
     <br>
     <br>
     <p><label>Pixel Size: </label><input type="number" id="pixel_scale" name="pixel_scale" min="1" max="100" value="1" formmethod="dialog"></p>
-    <p><label>Color Number: </label><input type="number" id="color_num" name="color_num" min="1" max="100" value="1" formmethod="dialog"></p>
+    <p><label>Color Number: </label><input type="number" id="color_num" name="color_num" min="-1" max="100" value="1" formmethod="dialog"></p>
     <button onclick="pixel_button();return false;"> Pixel it </button>
     <p><label>Output</label></p>
     <br>
@@ -52,6 +42,3 @@ urlname: pixel_filter_js
     Image：<span id="sz"></span><br>
     <img id="pic" >
 </body>
-<script src="pixel_filter.js"></script>
-<script src="kmeans.js"></script>
-</html>
