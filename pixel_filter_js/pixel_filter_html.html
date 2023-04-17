@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel_Filter_JS</title>
+    <style>
+        button {
+        background-color: black;
+        color: white;
+        }
+    </style>
+</head>
+<body>
+    <p>This tool is made by <a href="https://github.com/JingShing">JingShing</a>.</p>
+    <p>You can drag your file in the content(or simply click content to select file).Now we support txt, jpg and png file.</p>
+    <p>這個工具由 <a href="https://github.com/JingShing">JingShing</a> 製作</p>
+    <p>可以拖曳檔案到 content 欄(或點擊 content 選擇檔案)，目前支持 txt, jpg 和 png 檔。</p>
+    <form id = "all_file_input">
+        <input type="file" id="fileInput_content" style="display:none">
+        <p><label for="fileInput_content">Content(Select File):</label></p>
+        <br>
+        <textarea id="content" rows="10" cols="50"></textarea>
+        <br>
+        <br>
+        <p><label>Pixel Size: </label><input type="number" id="pixel_scale" name="pixel_scale" min="1" max="100"></p>
+        <button onclick="pixel_button();return false;"> Pixel it </button>
+        <p><label>Output</label></p>
+        <br>
+        <textarea id="output" rows="10" cols="50"></textarea>
+        <br>
+        
+        Processed Image：<span id="sz"></span><br>
+        <img id="pic" >
+      </form>
+</body>
+<script src="pixel_filter.js"></script>
+</html>
