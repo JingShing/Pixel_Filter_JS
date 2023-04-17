@@ -17,9 +17,9 @@ Then click button it will pixelize the file for you.
 
 # Example
 ## Before Pixelize
-![image/pixel_B.png]
+![B](image/pixel_B.png)
 ## After 10 pixel size Pixelize
-![image/pixel_A.png]
+![A](image/pixel_A_10.png)
 
 # Log
 ## Ver0.1
