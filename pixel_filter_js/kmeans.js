@@ -81,7 +81,11 @@ function pixel_function_all_s(){
         img.src = event.target.result;
         };
     }
-
+    if(k<=0){
+        var pixel_value = document.getElementById("pixel_scale").value;
+        pixelateImage("content", pixel_value, "pic");
+    }
+    else{
     // recall, after image load it will active
     img.onload = function() {
     // create canvas
@@ -179,4 +183,5 @@ function pixel_function_all_s(){
     var pixel_value = document.getElementById("pixel_scale").value;
     pixelateImage("pic", pixel_value, "pic");
     };
+    }
 }
