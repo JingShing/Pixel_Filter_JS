@@ -36,3 +36,6 @@
   * 我終於把 kmeans 函數用純 javascript 實現了。沒有使用 nodeJS 和第三方庫。
   * Kmeans
   * 顏色控制
+## Ver0.4
+* 功能:
+  * color number 用 0 或 -1 不會套用顏色數
