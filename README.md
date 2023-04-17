@@ -31,3 +31,8 @@ Then click button it will pixelize the file for you.
 ## Ver0.2
 * Feature:
   * Now can see before and after image
+## Ver0.3
+* Feature:
+  * I finally make kmeans in Javascript without using nodeJS and 3rd party modules.
+  * Kmeans
+  * color control
