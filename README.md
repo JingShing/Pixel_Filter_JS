@@ -36,3 +36,6 @@ Then click button it will pixelize the file for you.
   * I finally make kmeans in Javascript without using nodeJS and 3rd party modules.
   * Kmeans
   * color control
+## Ver0.4
+* Feature:
+  * color number using 0 or -1 will not apply color number.
