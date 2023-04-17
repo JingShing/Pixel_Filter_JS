@@ -11,3 +11,23 @@ This is rewrite from my old repo [Pixel_Art_filter](https://github.com/JingShing
 You can put the content you want to pixelize in content filed.
 
 Then click button it will pixelize the file for you.
+
+# UI
+![UI](image/UI.png)
+
+# Example
+## Before Pixelize
+![image/pixel_B.png]
+## After 10 pixel size Pixelize
+![image/pixel_A.png]
+
+# Log
+## Ver0.1
+* Feature:
+  * Core part: pixel size
+  * file load
+  * file drag and drop
+  * Now support txt, png and jpg
+## Ver0.2
+* Feature:
+  * Now can see before and after image
