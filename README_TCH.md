@@ -17,9 +17,9 @@
 
 # Example範例
 ## 像素化前
-![image/pixel_B.png]
+![B](image/pixel_B.png)
 ## 經歷 10 pixel 大小的像素化後
-![image/pixel_A.png]
+![A](image/pixel_A_10.png)
 
 # Log紀錄
 ## Ver0.1
