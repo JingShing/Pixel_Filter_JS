@@ -1,3 +1,15 @@
+---
+title: Pixel Filter JS
+date: 2023-04-16 10:00:00
+tags: [tool]
+categories: [tool]
+description: An online tool help you pixelize files
+top_img: https://img.itch.zone/aW1hZ2UvMTY4Njk0My85OTM1OTQ3LnBuZw==/original/M7FmPr.png
+comments: true
+cover: https://img.itch.zone/aW1hZ2UvMTY4Njk0My85OTM1OTQ3LnBuZw==/original/M7FmPr.png
+urlname: pixel_filter_js
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +40,7 @@
     <br>
     <br>
     <p><label>Pixel Size: </label><input type="number" id="pixel_scale" name="pixel_scale" min="1" max="100" value="1" formmethod="dialog"></p>
+    <p><label>Color Number: </label><input type="number" id="color_num" name="color_num" min="1" max="100" value="1" formmethod="dialog"></p>
     <button onclick="pixel_button();return false;"> Pixel it </button>
     <p><label>Output</label></p>
     <br>
@@ -39,3 +52,6 @@
     Image：<span id="sz"></span><br>
     <img id="pic" >
 </body>
+<script src="pixel_filter.js"></script>
+<script src="kmeans.js"></script>
+</html>
