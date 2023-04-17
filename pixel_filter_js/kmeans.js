@@ -1,11 +1,77 @@
-// kmeans
-function kMeansColorSegmentation(input, k, output_id) {
+    // k-means
+    var centers = new Array(k);
+    for (var i = 0; i < k; i++) {
+    centers[i] = data[Math.floor(Math.random() * data.length)];
+    }
+    var labels = new Array(data.length);
+    for (var i = 0; i < 10; i++) {
+    var sums = new Array(k);
+    var counts = new Array(k);
+    for (var j = 0; j < k; j++) {
+        sums[j] = [0, 0, 0];
+        counts[j] = 0;
+    }
+    for (var j = 0; j < data.length; j++) {
+        var dists = new Array(k);
+        for (var l = 0; l < k; l++) {
+        dists[l] = Math.pow(data[j][0] - centers[l][0], 2) + Math.pow(data[j][1] - centers[l][1], 2) + Math.pow(data[j][2] - centers[l][2], 2);
+        }
+        var minDist = Math.min.apply(null, dists);
+        var label = dists.indexOf(minDist);
+        labels[j] = label;
+        sums[label][0] += data[j][0];
+        sums[label][1] += data[j][1];
+        sums[label][2] += data[j][2];
+        counts[label]++;
+    }
+    for (var j = 0; j < k; j++) {
+        centers[j][0] = Math.floor(sums[j][0] / counts[j]);
+        centers[j][1] = Math.floor(sums[j][1] / counts[j]);
+    centers[j][2] = Math.floor(sums[j][2] / counts[j]);
+}
+}
+
+    // palette
+    var palette = new Array(k);
+    for (var i = 0; i < k; i++) {
+    palette[i] = "rgb(" + centers[i][0] + "," + centers[i][1] + "," + centers[i][2] + ")";
+    }
+
+    // generate new image
+    var newCanvas = document.createElement("canvas");
+    var newCtx = newCanvas.getContext("2d");
+    newCanvas.width = canvas.width;
+    newCanvas.height = canvas.height;
+    for (var i = 0; i < pixelArray.length; i++) {
+    for (var j = 0; j < pixelArray[i].length; j++) {
+        var index = (i * canvas.width + j) * 4;
+        var label = labels[i * canvas.width + j];
+        var color = centers[label];
+        newCtx.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+        newCtx.fillRect(j, i, 1, 1);
+    }
+    }
+
+    // display new image
+    document.getElementById(output_id).src = newCanvas.toDataURL("image/png");
+    document.getElementById("output").value = newCanvas.toDataURL("image/png");
+    };
+}
+
+// stupid code
+// I wrote these code because javascript cannot do the right order
+// between two functions so I need to mix 2 big function together
+function pixel_function_all_s(){
+    let input = "content";
+    let k = document.getElementById("color_num").value;
+    let output_id = "pic";
     // load image
     var img = new Image();
     if(typeof input == "string"){
-        if(input == "content"){
-            img.src = document.getElementById("content").value;
+        if(input == "content"||input == "output"){
+            img.src = document.getElementById(input).value;
         }
+        else if(input == "pic")img.src = document.getElementById(input).src;
         else img.src = base64String;
     }
     else{
@@ -16,8 +82,8 @@ function kMeansColorSegmentation(input, k, output_id) {
         };
     }
 
-  // recall, after image load it will active
-  img.onload = function() {
+    // recall, after image load it will active
+    img.onload = function() {
     // create canvas
     var canvas = document.createElement("canvas");
     var ctx = canvas.getContext("2d");
@@ -56,20 +122,20 @@ function kMeansColorSegmentation(input, k, output_id) {
     // k-means
     var centers = new Array(k);
     for (var i = 0; i < k; i++) {
-      centers[i] = data[Math.floor(Math.random() * data.length)];
+    centers[i] = data[Math.floor(Math.random() * data.length)];
     }
     var labels = new Array(data.length);
     for (var i = 0; i < 10; i++) {
-      var sums = new Array(k);
-      var counts = new Array(k);
-      for (var j = 0; j < k; j++) {
+    var sums = new Array(k);
+    var counts = new Array(k);
+    for (var j = 0; j < k; j++) {
         sums[j] = [0, 0, 0];
         counts[j] = 0;
-      }
-      for (var j = 0; j < data.length; j++) {
+    }
+    for (var j = 0; j < data.length; j++) {
         var dists = new Array(k);
         for (var l = 0; l < k; l++) {
-          dists[l] = Math.pow(data[j][0] - centers[l][0], 2) + Math.pow(data[j][1] - centers[l][1], 2) + Math.pow(data[j][2] - centers[l][2], 2);
+        dists[l] = Math.pow(data[j][0] - centers[l][0], 2) + Math.pow(data[j][1] - centers[l][1], 2) + Math.pow(data[j][2] - centers[l][2], 2);
         }
         var minDist = Math.min.apply(null, dists);
         var label = dists.indexOf(minDist);
@@ -78,36 +144,39 @@ function kMeansColorSegmentation(input, k, output_id) {
         sums[label][1] += data[j][1];
         sums[label][2] += data[j][2];
         counts[label]++;
-      }
-      for (var j = 0; j < k; j++) {
+    }
+    for (var j = 0; j < k; j++) {
         centers[j][0] = Math.floor(sums[j][0] / counts[j]);
         centers[j][1] = Math.floor(sums[j][1] / counts[j]);
     centers[j][2] = Math.floor(sums[j][2] / counts[j]);
-  }
+}
 }
 
-// palette
-var palette = new Array(k);
-for (var i = 0; i < k; i++) {
-  palette[i] = "rgb(" + centers[i][0] + "," + centers[i][1] + "," + centers[i][2] + ")";
-}
+    // palette
+    var palette = new Array(k);
+    for (var i = 0; i < k; i++) {
+    palette[i] = "rgb(" + centers[i][0] + "," + centers[i][1] + "," + centers[i][2] + ")";
+    }
 
-// generate new image
-var newCanvas = document.createElement("canvas");
-var newCtx = newCanvas.getContext("2d");
-newCanvas.width = canvas.width;
-newCanvas.height = canvas.height;
-for (var i = 0; i < pixelArray.length; i++) {
-  for (var j = 0; j < pixelArray[i].length; j++) {
-    var index = (i * canvas.width + j) * 4;
-    var label = labels[i * canvas.width + j];
-    var color = centers[label];
-    newCtx.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
-    newCtx.fillRect(j, i, 1, 1);
-  }
-}
+    // generate new image
+    var newCanvas = document.createElement("canvas");
+    var newCtx = newCanvas.getContext("2d");
+    newCanvas.width = canvas.width;
+    newCanvas.height = canvas.height;
+    for (var i = 0; i < pixelArray.length; i++) {
+    for (var j = 0; j < pixelArray[i].length; j++) {
+        var index = (i * canvas.width + j) * 4;
+        var label = labels[i * canvas.width + j];
+        var color = centers[label];
+        newCtx.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+        newCtx.fillRect(j, i, 1, 1);
+    }
+    }
 
     // display new image
     document.getElementById(output_id).src = newCanvas.toDataURL("image/png");
+    document.getElementById("output").value = newCanvas.toDataURL("image/png");
+    var pixel_value = document.getElementById("pixel_scale").value;
+    pixelateImage("pic", pixel_value, "pic");
     };
 }
