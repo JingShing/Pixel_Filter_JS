@@ -1,6 +1,13 @@
 // button
+function original_button(){
+    document.getElementById("pic").src = document.getElementById("content").value;
+}
+function processed_button(){
+    document.getElementById("pic").src = document.getElementById("output").value;
+}
 function pixel_button(){
-    pixelateImage("content", document.getElementById("pixel_scale").value, "pic");
+    var pixel_value = document.getElementById("pixel_scale").value;
+    pixelateImage("content", pixel_value, "pic");
 }
 
 // drag and drop
@@ -48,7 +55,7 @@ function handleFileSelect(evt) {
 function clearAllInput(){
 var inputs = document.getElementsByTagName("input");
     for (var i = 0; i < inputs.length; i++) {
-        inputs[i].value = "";
+        if(inputs[i].id.includes("file"))inputs[i].value = "";
     }
 }
 
